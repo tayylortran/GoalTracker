@@ -1,0 +1,23 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def root():
+    return {"message": "Goal Tracker API is running"}
+
+@app.get("/workouts")
+def get_workouts():
+    return [
+        {"id": 1, "name": "Push Day", "date": "2026-06-30"},
+        {"id": 2, "name": "Leg Day", "date": "2026-06-29"},
+    ]
